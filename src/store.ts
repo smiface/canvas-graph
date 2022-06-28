@@ -1,6 +1,22 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 
+function randomInteger(min, max) {
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  return Math.round(rand);
+}
+
+const generateDataPoints = (noOfDps:number) => {
+  var xVal = 0, yVal = 250;
+  var dps = [];
+  for(var i = 0; i < noOfDps; i++) {
+      yVal = randomInteger(0, 500);
+      dps.push({x: xVal,y: yVal});
+      xVal+=(500/noOfDps);
+  }
+  return dps;
+}
+
 class Store {
   constructor() {
     makeAutoObservable(this);
@@ -10,23 +26,9 @@ class Store {
   counter = 0;
 
   loadPoints() {
-    axios.get("btc.json").then((res) => {
-      let arr = res.data.values;
-      let initX = arr[0].x;
-      let initY = arr[0].y;
-      arr = arr.map(
-        (el) =>
-          (el = {
-            x: (el.x - initX) / 52.2,
-            y: (el.y - initY) * 10000 + 250
-          })
-      );
-
-      console.log(arr.map((el) => el.x));
-
-      this.points = arr;
-    });
-  }
+  const initialState = generateDataPoints(50);
+  this.points = initialState
+  };
 
   incement() {
     this.points.push({ x: 0, y: 0 });

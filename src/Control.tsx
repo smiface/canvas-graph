@@ -7,8 +7,8 @@ interface XYProps {
   idx: number;
 }
 
-const XY = ({ el, idx }: { XYProps }) => {
-  const [myX, setMyX] = useState();
+const XY = ({ el, idx }:  XYProps ) => {
+  const [myX, setMyX] = useState(el.x);
   const [myY, setMyY] = useState(el.y);
 
   return (
@@ -21,7 +21,7 @@ const XY = ({ el, idx }: { XYProps }) => {
           type="number"
           value={myX}
           onChange={(e) => {
-            setMyX(e.target.value);
+            setMyX(Number(e.target.value));
             store.setPoints(idx, Number(myX), Number(myY));
           }}
         />
@@ -32,7 +32,7 @@ const XY = ({ el, idx }: { XYProps }) => {
           type="number"
           value={myY}
           onChange={(e) => {
-            setMyY(e.target.value);
+            setMyY(Number(e.target.value));
             store.setPoints(idx, Number(myX), Number(myY));
           }}
         />

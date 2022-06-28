@@ -1,4 +1,5 @@
 import { StrictMode } from "react";
+ // @ts-ignore: Unreachable code error
 import * as ReactDOMClient from "react-dom/client";
 
 import App from "./App";

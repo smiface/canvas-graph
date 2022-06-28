@@ -7,12 +7,14 @@ import store from "./store";
 
 const App = () => {
   useEffect(() => {
+   setInterval(()=>{
     store.loadPoints();
+   }, 100)
   }, []);
 
   return (
     <div className="App" style={{ display: "flex" }}>
-      <Control />
+      {/* <Control /> */}
       <Graph />
     </div>
   );
